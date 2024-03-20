@@ -144,7 +144,7 @@
     </div>
     <div id="toast"></div>
 </body>
-
+<script src="https://smtpjs.com/v3/smtp.js"></script>
 <script src="./js/toast.js"></script>
 <script>
     let url_string = window.location.href;
@@ -219,7 +219,9 @@
                             To: 'phamxuantrung123d@gmail.com',
                             From: "eopbuster@gmail.com",
                             Subject: 'Xác nhận thanh toán.',
-                            Body: `Họ tên: ${itemToUpdate.name}\nMã đơn: ${itemToUpdate.madon}\nThành tiền: ${itemToUpdate.pay}`,
+                            Body: `Họ tên: ${itemToUpdate.name}
+                            Mã đơn: ${itemToUpdate.madon}
+                            Thành tiền: ${itemToUpdate.pay}`,
                         })
                         showPayiedNoti()
                     });

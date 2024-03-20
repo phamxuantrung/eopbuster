@@ -9,13 +9,13 @@ fetch("https://65e85faa4bb72f0a9c4f1974.mockapi.io/orders")
     .then(res => res.json())
     .then(data => {
         document.querySelector(".loading").style.display = "none"
-        if(data.length === 0){
-            document.querySelector(".empty").style.display = "flex"
-            return;
-        }
         let listItems = data.filter(e => {
             if (e.masv === localStorage.getItem("eop-buster_masv")) return e;
         })
+        if(listItems.length === 0){
+            document.querySelector(".empty").style.display = "flex"
+            return;
+        }
         listItems.sort(function (a, b) {
             return Number(b.id) - Number(a.id);
         });
