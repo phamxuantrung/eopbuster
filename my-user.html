@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="./css/order.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Google -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="./css/init.css">
+    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/toast.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Eopbuster - My User</title>
+</head>
+<style>
+    #myuser {
+        width: 100vw;
+        transform: translateY(-50%);
+        position: fixed;
+        top: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #myuser .myuser-update {
+        width: 100%;
+        max-width: 540px;
+        background: white;
+        padding: 32px 50px;
+        border-radius: 6px;
+    }
+
+    #myuser .myuser-title {
+        margin-bottom: 40px;
+        text-align: center;
+        position: relative;
+    }
+
+    #myuser .myuser-title a {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        font-size: 20px;
+        color: rgb(64, 64, 64);
+        display: block;
+        padding: 4px 8px;
+    }
+
+    #myuser .myuser-title p {
+        font-weight: 600;
+        font-size: 24px;
+        color: #333;
+    }
+
+    #myuser label {
+        margin-bottom: 4px;
+        display: block;
+        color: #454545;
+        font-weight: 600;
+    }
+
+    #myuser input {
+        border: 1px solid #bababa;
+        box-shadow: 0 0 8px 0.2px #e4e4e45d;
+        border-radius: 3px;
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 16px;
+        color: #454545;
+    }
+
+    #myuser button {
+        border: none;
+        background-color: #7a60ff;
+        cursor: pointer;
+        color: white;
+        border-radius: 3px;
+        width: 100%;
+        padding: 12px;
+    }
+
+    .noti-add-email {
+        display: flex;
+        align-items: center;
+        padding: 12px 18px;
+        background-color: #e3f6fd;
+        border-radius: 3px;
+        margin-bottom: 16px;
+    }
+
+    .noti-add-email i {
+        margin-right: 16px;
+        font-size: 16px;
+        color: #02B2F4;
+    }
+
+    .loading {
+        background-color: white;
+        display: flex;
+    }
+
+    @media (max-width: 540px) {
+        #myuser .myuser-update {
+            padding: 14px 18px;
+            border-radius: 0px;
+        }
+    }
+</style>
+
+<body>
+    <div id="myuser">
+        <div class="myuser-update">
+            <div class="myuser-title">
+                <a href="./order.html"><i class="fa-solid fa-chevron-left"></i></a>
+                <p>Tài khoản của tôi</p>
+            </div>
+            <div class="noti-add-email">
+                <i class="fa-regular fa-envelope"></i>
+                <p>Thêm địa chỉ email để nhận thông báo khi trang thái làm bài được cập nhập. <span
+                        onclick="FocusEmail()" style="color: #02B2F4; cursor: pointer;">Thêm ngay</span></p>
+            </div>
+            <label>Họ và tên*</label>
+            <input autocomplete="off" type="text" name="myuser-name">
+            <label>Mã sinh viên*</label>
+            <input autocomplete="off" type="text" name="myuser-account">
+            <label>Mật khẩu*</label>
+            <input autocomplete="off" type="text" name="myuser-password">
+            <label>Link*</label>
+            <input autocomplete="off" type="text" name="myuser-link">
+            <label>Email</label>
+            <input autocomplete="off" type="email" name="myuser-email">
+            <button class="myuser-button">Cập nhật</button>
+        </div>
+    </div>
+    <div class="loading">
+        <img src="./images/loading.gif" alt="">
+    </div>
+    <div id="toast"></div>
+</body>
+<script>
+    if (!localStorage.getItem("eop-buster_login")) {
+        window.location = location.href.replace("my-user", "order")
+    }
+    const apiUrl = "https://65e85faa4bb72f0a9c4f1974.mockapi.io/accounts"
+
+    function LoadAccountCurrent() {
+        fetch(apiUrl)
+            .then(response => {
+                return response.json();
+            })
+            .then((data) => {
+                let currentAccount = data.find((e) => {
+                    return e.masv === localStorage.getItem("eop-buster_masv")
+                });
+                document.querySelector("input[name='myuser-name']").value = currentAccount.name;
+                document.querySelector("input[name='myuser-account']").value = currentAccount.masv;
+                document.querySelector("input[name='myuser-password']").value = currentAccount.password;
+                document.querySelector("input[name='myuser-link']").value = currentAccount.link;
+                document.querySelector("input[name='myuser-email']").value = currentAccount.email;
+            })
+            .then(() => {
+                document.querySelector(".loading").style.backgroundColor = "#00000094"
+                document.querySelector(".loading").style.display = "none"
+            })
+    }
+    LoadAccountCurrent();
+
+    document.querySelector(".myuser-button").onclick = function () {
+        document.querySelector(".loading").style.display = "flex"
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Tìm kiếm trường cần sửa đổi trong dữ liệu
+                const itemToUpdate = data.find(e => e.masv === localStorage.getItem("eop-buster_masv"));
+
+                // Nếu tìm thấy trường cần sửa đổi
+                if (itemToUpdate) {
+                    // Sửa đổi trường cần thiết
+                    itemToUpdate.name = document.querySelector("input[name='myuser-name']").value;
+                    itemToUpdate.masv = document.querySelector("input[name='myuser-account']").value;
+                    itemToUpdate.password = document.querySelector("input[name='myuser-password']").value;
+                    itemToUpdate.link = document.querySelector("input[name='myuser-link']").value;
+                    itemToUpdate.email = document.querySelector("input[name='myuser-email']").value;
+
+
+                    // Gửi yêu cầu PUT/PATCH để cập nhật dữ liệu lên server
+                    return fetch(apiUrl + `/${itemToUpdate.id}`, {
+                        method: 'PUT', // hoặc 'PATCH' nếu chỉ muốn cập nhật trường cụ thể
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(itemToUpdate)
+                    }).then(() => {
+                        localStorage.setItem("eop-buster_account", itemToUpdate.name);
+                        localStorage.setItem("eop-buster_masv", itemToUpdate.masv);
+                        localStorage.setItem("eop-bustere_email", itemToUpdate.email);
+                    });
+                }
+            }).then(() => {
+                LoadAccountCurrent();
+            })
+    }
+
+    function FocusEmail() {
+        document.querySelector("input[name='myuser-email']").focus();
+    }
+</script>
+
+</html>

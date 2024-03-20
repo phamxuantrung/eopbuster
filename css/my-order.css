@@ -1,0 +1,406 @@
+nav {
+    width: 100%;
+    height: 34px;
+    background-color: #7a60ff;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 40px;
+}
+
+nav a:hover {
+    color: white;
+}
+
+nav .my-user {
+    margin-right: 40px;
+    cursor: default;
+    position: relative;
+}
+
+nav .my-user::after {
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+
+nav .my-user:hover .setting {
+    display: block;
+}
+
+nav .my-user img {
+    width: 22px;
+    height: 22px;
+    border-radius: 50px;
+}
+
+nav .my-user p {
+    margin-left: 8px;
+    color: white;
+    text-transform: capitalize;
+}
+
+nav .setting {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background-color: white;
+    box-shadow: 0 0 8px 2px #3333332d;
+    border-radius: 3px;
+    min-width: 160px;
+    z-index: 1001;
+}
+
+
+nav .setting::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid #fff;
+
+}
+
+nav .setting>div {
+    padding: 8px 16px;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+nav .setting>div:hover {
+    background-color: #dedede1a;
+    color: #7a60ff;
+}
+
+.my-order {
+    max-width: 960px;
+    margin: 0 auto;
+    border-radius: 4px;
+    user-select: none;
+    position: relative;
+}
+
+.my-order .item {
+    background-color: #fff;
+    margin-bottom: 0.9375rem;
+    padding-top: 12px;
+}
+
+.my-order .item.order-cancel{
+    background-color: #f9eae6;
+}
+
+.my-order .item.order-cancel .info{
+    border: none;
+}
+
+.my-order .item.order-cancel .status{
+    color: #E66F51;
+}
+
+.my-order .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px 12px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, .09);
+}
+
+.my-order .tag-status {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 12px;
+    outline: none;
+    padding: 4px 8px;
+    text-transform: capitalize;
+    margin: 0 8px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-order .tag-status.waiting {
+    background-color: #FBDDBF;
+    display: flex;
+    color: #523213;
+}
+
+.my-order .tag-status.payied {
+    background-color: #C5F1D9;
+    display: flex;
+    color: #345543;
+}
+
+.my-order .supporter {
+    align-items: center;
+    border-right: 1px solid rgba(0, 0, 0, .12);
+    display: none;
+    margin: 0 10px 0 0;
+    padding: 0 5px 0 0;
+    text-align: right;
+    color: #26aa99;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.my-order .supporter.active {
+    display: flex;
+}
+
+.my-order .supporter-mobile {
+    display: none;
+    align-items: center;
+    margin: 0 10px 0 0;
+    text-align: left;
+    color: #26aa99;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.my-order .status {
+    color: #7a60ff;
+    line-height: 24px;
+    text-align: right;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.my-order .info {
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, .87);
+    padding: 12px 24px 12px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, .09);
+}
+
+.my-order .info-product {
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    padding: 0 6px 0 12px;
+    word-wrap: break-word;
+}
+
+.my-order .info-product .deadline {
+    border: 0.5px solid #7a60ff;
+    border-radius: 1px;
+    color: #7a60ff;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0 6px 0 0;
+    padding: 2px 4px;
+    vertical-align: middle;
+    margin-top: 5px;
+}
+
+.my-order .total-pay {
+    padding: 24px 24px 12px;
+    background: #fffefb;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.my-order .total-pay.hidden {
+    display: none;
+}
+
+.my-order .total-pay span {
+    margin-left: 6px;
+    color: #7a60ff;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.my-order .footer {
+    align-items: center;
+    background: #fffefb;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 12px 24px 24px;
+}
+
+.my-order .footer.hidden {
+    display: none;
+}
+
+.my-order .footer p {
+    color: rgba(0, 0, 0, .54);
+    font-size: 12px;
+}
+
+.my-order .footer .pay-button {
+    border-radius: 2px;
+    min-height: 40px;
+    min-width: 150px;
+    outline: none;
+    outline: 0;
+    overflow: hidden;
+    padding: 8px 20px;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    background-color: #7a60ff;
+    color: white;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.my-order .footer .contact-button {
+    border-radius: 2px;
+    min-height: 40px;
+    min-width: 150px;
+    outline: none;
+    outline: 0;
+    overflow: hidden;
+    padding: 8px 20px;
+    text-overflow: ellipsis;
+    border: 1px solid rgba(0, 0, 0, .09);
+    color: #555;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin: 0 8px;
+}
+
+.cancel-order {
+    cursor: pointer;
+    padding: 4px 12px;
+    border: none;
+    border-radius: 4px;
+    background: yellow;
+    color: #464646;
+    font-weight: 600;
+    display: none;
+}
+
+.cancel-order.active{
+    display: block;
+}
+
+.empty{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100vw;
+}
+
+.empty img{
+    width: 260px;
+}
+
+.empty a{
+    text-decoration: none;
+    padding: 8px 24px;
+    width: 223px;
+    text-align: center;
+    color: #fff;
+    background-color: #7a60ff;
+    border-radius: 4px;
+    margin-top: 24px;
+    cursor: pointer;
+}
+
+@media all and (max-width: 960px) {
+    nav a {
+        margin-left: 24px;
+    }
+
+    nav .my-user {
+        margin-right: 24px;
+    }
+
+}
+
+@media all and (max-width: 560px) {
+    nav a {
+        margin-left: 10px;
+    }
+
+    nav .my-user {
+        margin-right: 10px;
+    }
+
+    #toast {
+        left: 7px;
+    }
+}
+
+@media all and (max-width: 540px) {
+
+    #login .login-container {
+        padding: 14px 18px;
+        border-radius: 0px;
+    }
+
+    nav {
+        margin-bottom: 20px;
+    }
+}
+
+@media all and (max-width: 680px) {
+    .my-order .supporter.active {
+        display: none;
+    }
+
+    .my-order .footer {
+        flex-direction: column;
+        align-items: start;
+        padding: 0 12px 12px;
+    }
+
+    .my-order .footer p {
+        padding: 12px 0;
+    }
+
+    .my-order .total-pay {
+        padding: 24px 24px 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, .09);
+        padding: 8px 12px;
+    }
+
+    .my-order .total-pay span {
+        font-size: 14px;
+    }
+
+    .my-order .footer .contact-button {
+        margin-left: 0;
+    }
+
+    .my-order .title {
+        padding: 0px 10px 6px 12px;
+    }
+
+    .my-order .supporter-mobile.active {
+        display: flex;
+        font-size: 12px;
+    }
+
+    .my-order .total-pay {
+        justify-content: space-between;
+    }
+}

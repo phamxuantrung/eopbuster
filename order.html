@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Eop Buster - Order</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="./css/order.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Google -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="./css/init.css">
+    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/toast.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+
+<body>
+
+    <div id="order">
+        <nav>
+            <a style="display: flex; align-items: center;" href="./index.html">
+                <i style="margin-right: 6px; font-size: 13px;" class="fa-solid fa-house"></i>
+                <p>Trang chủ</p>
+            </a>
+            <div class="my-user" style="display: flex; justify-content: center;">
+                <img src="./images/user-white.jpg" alt="">
+                <p></p>
+                <div class="setting">
+                    <div class="user-info">Tài khoản của tôi</div>
+                    <div class="my-order">Đơn đã đặt</div>
+                    <div class="log-out">Đăng xuất</div>
+                </div>
+            </div>
+        </nav>
+        <div class="box">
+            <div class="noti">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <p>Nếu bạn muốn hoàn thành ngay trong ngày, vui lòng chọn tốc độ làm bài "Nhanh"</p>
+            </div>
+            <!-- unit -->
+            <div class="unit">
+                <div class="label">
+                    <div style="display: flex; align-items: center;">
+                        <div class="input-checkbox check-all">
+                            <input type="checkbox">
+                            <div class="stardust-checkbox"></div>
+                        </div>
+                        <div class="tag">Thịnh hành</div>
+                        <div class="title">Unit thường</div>
+                    </div>
+                    <div class="show-toggle active">
+                        <i class="fa-solid fa-angle-down"></i>
+                        <i class="fa-solid fa-angle-up"></i>
+                    </div>
+                </div>
+                <div class="product active"></div>
+            </div>
+            <!-- test -->
+            <div style="margin-bottom: 20px;"></div>
+            <div class="test">
+                <div class="label">
+                    <div style="display: flex; align-items: center;">
+                        <div class="input-checkbox check-all">
+                            <input type="checkbox">
+                            <div class="stardust-checkbox"></div>
+                        </div>
+                        <div class="tag">Thịnh hành</div>
+                        <div class="title">Unit test</div>
+                    </div>
+                    <div class="show-toggle">
+                        <i class="fa-solid fa-angle-down"></i>
+                        <i class="fa-solid fa-angle-up"></i>
+                    </div>
+                </div>
+                <div class="product"></div>
+            </div>
+            <div style="margin-bottom: 20px;"></div>
+            <!-- pay -->
+            <div class="pay">
+                <div style="display: flex;">
+                    <div class="title">Tổng thanh toán (0 Lựa Chọn): </div>
+                    <div class="total-pay">₫ 0.000</div>
+                </div>
+                <button class="button" type="submit">Đặt hàng</button>
+            </div>
+        </div>
+        <div class="final">
+            <div class="infor">
+                <div class="vtrWey"></div>
+                <div class="main">
+                    <div class="title">
+                        <i class="fa-solid fa-user"></i> Thông Tin Cơ Bản
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <p class="user-infor" style="font-weight: bold; text-transform: capitalize;">Phạm Xuân Trung
+                            (MSV) 2021601819</p>
+                        <p class="log-out" style="color: #4080ee; cursor: pointer;">Đăng xuất</p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-bottom: 20px;"></div>
+            <div class="product-final"></div>
+            <div class="last">
+                <div style="display: grid; grid-template-columns: auto auto;">
+                    <div style="display: flex; padding: 16px 30px;">
+                        <div style="display: flex; align-items: center; margin-right: 8px;">Lời nhắn: </div>
+                        <input name="note-text" type="text" placeholder="Lưu ý cho người làm...">
+                    </div>
+                    <div class="deadline"
+                        style="display: flex; padding: 16px 30px; justify-content: space-between;     border-left: 1px dashed rgba(0,0,0,.09);">
+                        <div style="display: flex; align-items: center; color: #00bfa5;">Hoàn thành trước: </div>
+                        <input type="date" name="deadline" id="" required="">
+                    </div>
+                </div>
+                <div class="final-pay">
+                    <div class="title">Tổng số tiền (1 lựa chọn):</div>
+                    <div class="final-total-pay">₫ 0.000</div>
+                </div>
+            </div>
+            <form id="pay-form">
+                <textarea name="product" hidden></textarea>
+                <input name="deadline" type="text" hidden>
+                <input name="note" type="text" hidden>
+                <input name="pay" type="text" hidden>
+                <div class="agree-order">
+                    <input type="checkbox" required>
+                    <p>Tôi xác nhận thông tin đặt hàng chích xác.</p>
+                </div>
+                <button type="submit">Đặt ngay</button>
+            </form>
+        </div>
+    </div>
+    <div id="login">
+        <div class="login-container">
+            <div class="login-title">
+                <a href="./index.html"><i class="fa-solid fa-chevron-left"></i></a>
+                <p>Đăng nhập</p>
+            </div>
+            <input type="text" name="login-account" placeholder="Mã sinh viên" autocomplete="off">
+            <input type="text" name="login-password" placeholder="Mật khẩu" autocomplete="off">
+            <p style="margin-bottom: 16px;">Bạn chưa có tài khoản? Đăng kí <a href="./register.html">tại đây</a></p>
+            <button>Tiếp tục</button>
+        </div>
+    </div>
+
+
+    <div class="loading">
+        <img src="./images/loading.gif" alt="">
+    </div>
+
+    <div id="toast"></div>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="./js/toast.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/order.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="./css/order.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Google -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="./css/init.css">
+    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/toast.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Pay</title>
+</head>
+<style>
+    .qr-pay {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-50%);
+        position: fixed;
+        top: 50%;
+        width: 100vw;
+    }
+
+    .qr-pay .info {
+        background: #fff;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+        width: 350px;
+
+    }
+
+    .qr-pay .back-button i {
+        font-size: 16px;
+    }
+
+    .qr-pay .back-button {
+        padding: 0 16px 0 8px;
+        cursor: pointer;
+    }
+
+    .qr-pay .info .title {
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .qr-pay .info .madonhang span {
+        color: #555;
+    }
+
+    .qr-code {
+        margin: 8px 0;
+        width: 350px;
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    .qr-code img {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .qr-pay .info-2 {
+        background: #fff;
+        padding: 12px 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        width: 350px;
+    }
+
+    .qr-pay .info-2 .ten {
+        font-weight: 600;
+    }
+
+    .qr-pay .info-2 .stk {
+        color: #555;
+    }
+
+    .qr-pay .info-2 .thanhtien {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 24px;
+        width: 100%;
+        background-color: #F4F4F5;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 4px;
+        color: #333;
+    }
+
+    .confirm-pay {
+        padding: 12px 24px;
+        background-color: #7a60ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        border-radius: 8px;
+        margin-top: 8px;
+        cursor: pointer;
+    }
+
+    .loading {
+        display: flex;
+        background-color: #F4F4F5;
+    }
+</style>
+
+<body>
+    <div class="qr-pay">
+        <div>
+            <div class="info">
+                <div class="back-button"><i class="fa-solid fa-chevron-left"></i></div>
+                <div>
+                    <p class="title">Thanh toán hóa đơn</p>
+                    <p class="madonhang">Mã đơn hàng: <span>Ydkh93hja9D</span></p>
+                </div>
+            </div>
+            <div class="qr-code">
+                <img src="./images/qr.jpg" alt="qr-code">
+            </div>
+            <div class="info-2">
+                <p class="ten">Phạm Xuân Trung</p>
+                <p class="stk">0000 3512 408</p>
+                <div class="thanhtien">10.000</div>
+            </div>
+            <div class="confirm-pay">Tôi đã thanh toán</div>
+        </div>
+    </div>
+    <div class="loading">
+        <img src="./images/loading.gif" alt="">
+    </div>
+    <div id="toast"></div>
+</body>
+
+<script src="./js/toast.js"></script>
+<script>
+    let url_string = window.location.href;
+    let url = new URL(url_string);
+    let madon = url.searchParams.get("madon");
+    fetch("https://65e85faa4bb72f0a9c4f1974.mockapi.io/orders")
+        .then(res => res.json())
+        .then(data => {
+            document.querySelector(".loading").style.display = "none"
+            document.querySelector(".qr-pay").style.display = "flex"
+            showNoti();
+            let currentOrder = data.find(e => {
+                return e.madon === madon;
+            })
+            document.querySelector(".madonhang").innerText = currentOrder.madon
+            document.querySelector(".thanhtien").innerText = currentOrder.pay
+        })
+
+    document.querySelector(".back-button").onclick = function () {
+        let url_string = window.location.href;
+        let url = new URL(url_string);
+        url.searchParams.delete("madon");
+        let modified_url = url.toString();
+        window.location = modified_url.replace("pay", "my-order");
+    }
+
+    function showPayiedNoti() {
+        toast({
+            title: "Xác nhận thành công!",
+            message: "Hãy chờ chúng tôi xác nhận bạn đã thanh toán.",
+            type: "success",
+            duration: 8000,
+        });
+    }
+
+    function showNoti() {
+        toast({
+            title: "Chý ý!",
+            message: 'Sau khi chuyển khoản thành công, hãy quay lại đây ấn "Tôi đã thanh toán" để xác nhận.',
+            type: "warning",
+            duration: 15000,
+        });
+    }
+
+    document.querySelector(".confirm-pay").onclick = function () {
+        const apiUrl = "https://65e85faa4bb72f0a9c4f1974.mockapi.io/orders"
+
+        // Gửi yêu cầu GET để lấy dữ liệu từ API
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Tìm kiếm trường cần sửa đổi trong dữ liệu
+                const itemToUpdate = data.find(item => item.madon === madon);
+
+                // Nếu tìm thấy trường cần sửa đổi
+                if (itemToUpdate) {
+                    // Sửa đổi trường cần thiết
+                    itemToUpdate["noti-payied"] = "";
+
+                    // Gửi yêu cầu PUT/PATCH để cập nhật dữ liệu lên server
+                    return fetch(apiUrl + `/${itemToUpdate.id}`, {
+                        method: 'PUT', // hoặc 'PATCH' nếu chỉ muốn cập nhật trường cụ thể
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(itemToUpdate)
+                    }).then(() => {showPayiedNoti()});
+                }
+            })
+    }
+</script>
+
+</html>

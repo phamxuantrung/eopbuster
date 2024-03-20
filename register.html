@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Eopbuster - Đăng kí tài khoản</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="./css/order.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Google -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="./css/toast.css">
+    <link rel="stylesheet" href="./css/init.css">
+    <link rel="stylesheet" href="./css/loading.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<style>
+    #register {
+        width: 100vw;
+        transform: translateY(-50%);
+        position: fixed;
+        top: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #register .register-container {
+        width: 100%;
+        max-width: 540px;
+        background: white;
+        padding: 32px 50px;
+        border-radius: 6px;
+    }
+
+    #register .register-title {
+        margin-bottom: 40px;
+        text-align: center;
+        position: relative;
+    }
+
+    #register .register-title a {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        font-size: 20px;
+        color: rgb(64, 64, 64);
+        display: block;
+        padding: 4px 8px;
+    }
+
+    #register .register-title p {
+        font-weight: 600;
+        font-size: 24px;
+        color: #333;
+    }
+
+    #register label {
+        margin-bottom: 4px;
+        display: block;
+        color: #454545;
+    }
+
+    #register input {
+        border: 1px solid #bababa;
+        box-shadow: 0 0 8px 0.2px #e4e4e45d;
+        border-radius: 3px;
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 16px;
+        color: #454545;
+    }
+
+    #register button {
+        border: none;
+        background-color: #7a60ff;
+        cursor: pointer;
+        color: white;
+        border-radius: 3px;
+        width: 100%;
+        padding: 12px;
+    }
+
+    @media (max-width: 540px) {
+        #register .register-container {
+            padding: 14px 18px;
+            border-radius: 0px;
+        }
+        body{
+            background-color: #fff;
+        }
+    }
+</style>
+
+<body>
+    <div id="register">
+        <div class="register-container">
+            <div class="register-title">
+                <a href="./order.html"><i class="fa-solid fa-chevron-left"></i></a>
+                <p>Đăng kí tài khoản</p>
+            </div>
+            <input autocomplete="off" type="text" name="register-name" placeholder="Họ và tên*">
+            <input autocomplete="off" type="text" name="register-account" placeholder="Mã sinh viên*">
+            <input autocomplete="off" type="text" name="register-password" placeholder="Mật khẩu*">
+            <input autocomplete="off" type="text" name="register-link" placeholder="Link Facebook hoặc Zalo*">
+            <input autocomplete="off" type="email" name="register-email" placeholder="Email">
+            <p style="margin-bottom: 16px;">Bạn đã có tài khoản? Đăng nhập <a href="./register.html">tại đây</a></p>
+            <button class="register-button">Tiếp tục</button>
+        </div>
+    </div>
+    <div class="loading">
+        <img src="./images/loading.gif" alt="">
+    </div>
+    <div id="toast"></div>
+</body>
+<script src="./js/toast.js"></script>
+<script>
+    // Define the URL of the API endpoint
+    const apiUrl = 'https://65e85faa4bb72f0a9c4f1974.mockapi.io/accounts';
+
+    let account = document.querySelector("#register input[name='register-account']")
+    let password = document.querySelector("#register input[name='register-password']")
+    let link = document.querySelector("#register input[name='register-link']")
+    let email = document.querySelector("#register input[name='register-email']")
+    let yourname = document.querySelector("#register input[name='register-name']")
+
+    function checkIfNewDataIsUnique(existingData, newData) {
+        for (let i = 0; i < existingData.length; i++) {
+            if (existingData[i].masv === newData.masv) {
+                return false; // Dữ liệu mới không duy nhất
+            }
+        }
+        return true; // Dữ liệu mới là duy nhất
+    }
+
+    function showSuccess() {
+        toast({
+            title: "Thành công!",
+            message: `Tài khoản đã được đăng kí thành công.`,
+            type: "success",
+            duration: 10000,
+        });
+    }
+
+    function showWarning() {
+        toast({
+            title: "Thông báo!",
+            message: `Tài khoản này đã tồn tại. Vui lòng thử lại.`,
+            type: "info",
+            duration: 10000,
+        });
+    }
+
+    function showError() {
+        toast({
+            title: "Thất bại!",
+            message: `Có lỗi xảy ra. Vui lòng thử lại.`,
+            type: "error",
+            duration: 10000,
+        });
+    }
+
+    document.querySelector("#register button").onclick = function () {
+        if (yourname.value.trim() !== "" && account.value.trim() !== "" && password.value.trim() !== "" && link.value.trim() !== "") {
+            document.querySelector(".loading").style.display = 'flex'
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(existingData => {
+                    // Kiểm tra xem dữ liệu mới có trùng với dữ liệu đã tồn tại không
+                    const newAccount = {
+                        name: yourname.value.trim(),
+                        masv: account.value.trim(),
+                        password: password.value.trim(),
+                        email: email.value.trim(),
+                        link: link.value.trim()
+                    };
+
+                    if (checkIfNewDataIsUnique(existingData, newAccount)) {
+                        // Nếu dữ liệu mới không trùng, thực hiện yêu cầu POST
+                        fetch(apiUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(newAccount)
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                yourname.value = ''
+                                account.value = ''
+                                password.value = ''
+                                email.value = ''
+                                link.value = ''
+                                document.querySelector(".loading").style.display = 'none'
+                            })
+                            .then(() => showSuccess())
+                            .catch(error => {
+                                console.error('Error');
+                            });
+                    } else {
+                        document.querySelector(".loading").style.display = 'none'
+                        showWarning();
+                    }
+                })
+                .catch(error => {
+                    showError();
+                });
+        }
+
+        if (account.value.trim() === "") {
+            account.style.borderColor = '#dc354667'
+            account.style.backgroundColor = '#dc35461f'
+        }
+        else {
+            account.style.borderColor = "#d3d3d3"
+            account.style.backgroundColor = "#fff"
+
+        }
+        if (password.value.trim() === "") {
+            password.style.borderColor = '#dc354667'
+            password.style.backgroundColor = '#dc35461f'
+        }
+        else {
+            password.style.borderColor = "#d3d3d3"
+            password.style.backgroundColor = "#fff"
+
+        }
+        if (link.value.trim() === "") {
+            link.style.borderColor = '#dc354667'
+            link.style.backgroundColor = '#dc35461f'
+        }
+        else {
+            link.style.borderColor = "#d3d3d3"
+            link.style.backgroundColor = "#fff"
+
+        }
+        if (yourname.value.trim() === "") {
+            yourname.style.borderColor = '#dc354667'
+            yourname.style.backgroundColor = '#dc35461f'
+        }
+        else {
+            yourname.style.borderColor = "#d3d3d3"
+            yourname.style.backgroundColor = "#fff"
+        }
+    }
+</script>
+
+</html>

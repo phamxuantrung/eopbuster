@@ -1,0 +1,335 @@
+body {
+    color: #264653 !important;
+}
+
+p {
+    color: #264653 !important;
+}
+
+select {
+    color: #264653 !important;
+}
+
+.option-other i {
+    color: #264653;
+}
+
+.nav {
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, .09);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.content-nav{
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.content-nav .search-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+}
+
+.search-nav .search{
+    padding: 4px 8px;
+    border: 1px solid rgba(0, 0, 0, .09);
+}
+
+.search-nav .search input{
+    border: none;
+    outline: none;
+    padding: 2px 6px;
+}
+
+.search-nav .out{
+    padding: 6px 16px;
+    background-color: #7a60ff;
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.content-nav .option{
+    border-top: 1px solid rgba(0, 0, 0, .09);
+    padding: 8px 12px;
+    display: flex;
+}
+
+.option .add-filter{
+    background-color: #F0F2F5;
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: #20272E;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    margin: 0px 4px;
+}
+
+.option .filter{
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .09);
+    border-radius: 4px;
+    display: none;
+}
+
+.option .filter.active{
+    display: block;
+}
+
+.option .filter .item, .option .filter .item-c2{
+    padding: 8px 20px;
+    min-width: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.option .filter .title-back{
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, .09);
+}
+
+.option .filter .title-back p{
+    margin-left: 16px;
+    font-weight: 400;
+}
+
+.option .filter .title-back i{
+    font-size: 13px;
+    color: gray;
+}
+
+.option .filter .item:hover, .option .filter .item-c2:hover{
+    background-color: #f0f2f5be;
+}
+
+.option .filter .item i{
+    color: #264653;
+}
+
+.option .filter-active{
+    background-color: #F0F2F5;
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: #20272E;
+    position: relative;
+    user-select: none;
+    margin: 0px 4px;
+    display: flex;
+    align-items: center;
+}
+
+.option .filter-active p, .option .filter-active i{
+    color: #7a60ff !important;
+}
+
+.option .filter-active p{
+    margin: 0px 12px 0px 6px;
+}
+
+.option .filter-active i{
+    cursor: pointer;
+}
+
+.option .sort{
+    background-color: #F0F2F5;
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: #20272E;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    margin: 0px 4px;
+}
+
+.option .sort i{
+    color: #20272E;
+    margin-right: 6px;
+}
+
+.option .sort-item{
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .09);
+    border-radius: 4px;
+    width: fit-content;
+    padding: 4px;
+    display: none;
+}
+
+.option .sort-item.active{
+    display: block;
+}
+
+
+.option .sort-item .item{
+    padding: 8px 20px 8px 32px;
+    text-wrap: nowrap;
+    display: flex;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.option .sort-item .item:hover{
+    background-color: rgba(0, 0, 0, .09);
+}
+
+.option .sort-item .by > div, .option .sort-item .ord > div{
+    position: relative;
+}
+
+.option .sort-item .point{
+    width: 5px;
+    height: 5px;
+    background-color: #20272E;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    display: none;
+}
+
+.option .sort-item .item.active ~ .point{
+    display: block;
+}
+
+
+.order {
+    padding-top: 7.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+    border-radius: 4px;
+    user-select: none;
+    position: relative;
+}
+
+.order .item {
+    background-color: #fff;
+    margin-bottom: 0.9375rem;
+}
+
+.order .item.doing {
+    border-left: 6px solid #FFA500;
+    background-color: #f9f9b0;
+}
+
+.order .item.doing .note input {
+    background-color: #f9f9b0;
+}
+
+.order .item.done .note input {
+    background-color: #D9F9D9;
+}
+
+.order .item.done {
+    border-left: 6px solid #6dea6d;
+    background-color: #D9F9D9;
+}
+
+.order .item.cancel .note input {
+    background-color: #F9DCD5;
+}
+
+.order .item.cancel {
+    border-left: 6px solid #E66F51;
+    background-color: #F9DCD5;
+}
+
+.order .title {
+    align-items: center;
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, .09);
+    box-sizing: border-box;
+    height: 36px;
+    padding: 0 20px;
+}
+
+.order .title p {
+    margin-right: 6px;
+}
+
+.order .title i {
+    color: #7a60ff;
+    margin: 0 6px;
+    cursor: copy;
+}
+
+.order .info {
+    color: rgba(0, 0, 0, .87);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+}
+
+.order .note {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, .09);
+    padding: 10px 20px;
+}
+
+.order .note input {
+    margin-left: 12px;
+    padding: 6px;
+    border: 0;
+    flex: 1;
+}
+
+.comfirm-pay {
+    display: none;
+    padding: 8px 20px;
+    background-color: #cdc6f5;
+    align-items: center;
+}
+
+.comfirm-pay.active {
+    display: flex;
+}
+
+.comfirm-pay button {
+    margin-left: 6px;
+    padding: 2px 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    border-radius: 2px;
+    background-color: #7a60ff;
+}
+
+.tag-payied {
+    background-color: rgb(0, 204, 0);
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-size: 12px;
+    outline: none;
+    padding: 3px 8px;
+    text-transform: capitalize;
+    margin: 0 8px;
+    display: none;
+}
+
+.tag-payied.active {
+    display: block;
+}
