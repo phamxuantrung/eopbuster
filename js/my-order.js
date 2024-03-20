@@ -106,3 +106,7 @@ document.querySelectorAll(".log-out").forEach(e => {
 document.querySelector(".user-info").onclick = function(){
     window.location = location.href.replace("my-order", "my-user")
 }
+
+document.querySelector("nav .my-user").onclick = function(){
+    this.querySelector(".setting").classList.toggle("active")
+}

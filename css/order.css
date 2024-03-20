@@ -99,8 +99,9 @@ nav .my-user::after {
     height: 10px;
 }
 
-nav .my-user:hover .setting {
-    display: block;
+nav .my-user {
+    cursor: pointer;
+    user-select: none;
 }
 
 nav .my-user img {
@@ -125,6 +126,10 @@ nav .setting {
     z-index: 1001;
     border-radius: 3px;
     min-width: 160px;
+}
+
+nav .setting.active{
+    display: block;
 }
 
 

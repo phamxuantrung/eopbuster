@@ -488,3 +488,7 @@ function showWarningToast() {
 
 if (localStorage.getItem("eop-buster_login")) showWarningToast();
 
+document.querySelector("nav .my-user").onclick = function(){
+    this.querySelector(".setting").classList.toggle("active")
+}
+

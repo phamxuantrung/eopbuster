@@ -501,4 +501,10 @@ function update(e, id, fieldToUpdate) {
         }).then(() => LoadData())
 }
 
-
+document.querySelector(".out").onclick = function(){
+    localStorage.removeItem("eop-buster_login");
+    localStorage.removeItem("eop-buster_account");
+    localStorage.removeItem("eop-buster_masv");
+    localStorage.removeItem("eop-buster_admin_account");
+    location.reload();
+}

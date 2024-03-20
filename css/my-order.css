@@ -20,8 +20,9 @@ nav a:hover {
 
 nav .my-user {
     margin-right: 40px;
-    cursor: default;
+    cursor: pointer;
     position: relative;
+    user-select: none;
 }
 
 nav .my-user::after {
@@ -32,10 +33,6 @@ nav .my-user::after {
     left: 0;
     right: 0;
     height: 10px;
-}
-
-nav .my-user:hover .setting {
-    display: block;
 }
 
 nav .my-user img {
@@ -60,6 +57,10 @@ nav .setting {
     border-radius: 3px;
     min-width: 160px;
     z-index: 1001;
+}
+
+nav .setting.active{
+    display: block;
 }
 
 
