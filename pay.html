@@ -211,7 +211,18 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(itemToUpdate)
-                    }).then(() => {showPayiedNoti()});
+                    }).then(() => {
+                        Email.send({
+                            Host: "smtp.elasticemail.com",
+                            Username: "eopbuster@gmail.com",
+                            Password: "98CA9F02EB45AD9E8C3AEA22D5C408502139",
+                            To: 'phamxuantrung123d@gmail.com',
+                            From: "eopbuster@gmail.com",
+                            Subject: 'Xác nhận thanh toán.',
+                            Body: `Họ tên: ${itemToUpdate.name}\nMã đơn: ${itemToUpdate.madon}\nThành tiền: ${itemToUpdate.pay}`,
+                        })
+                        showPayiedNoti()
+                    });
                 }
             })
     }

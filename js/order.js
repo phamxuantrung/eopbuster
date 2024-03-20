@@ -360,7 +360,7 @@ document.querySelector(".box .button").onclick = function () {
             Host: "smtp.elasticemail.com",
             Username: "eopbuster@gmail.com",
             Password: "98CA9F02EB45AD9E8C3AEA22D5C408502139",
-            To: ['phamxuantrung123d@gmail.com', 'emlacuatung2011@gmail.com'],
+            To: ['phamxuantrung123d@gmail.com', 'lekimthanh28072003@gmail.com'],
             From: "eopbuster@gmail.com",
             Subject: "Đơn hàng mới từ eopbuster",
             Body: `Có một đơn hàng mới của ${form.querySelector("input[name='yourname']").value}`,
