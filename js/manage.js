@@ -95,7 +95,7 @@ document.querySelector(".option section").insertAdjacentHTML('beforebegin', filt
 function RemoveTag() {
     document.querySelectorAll(".option i.fa-xmark").forEach((e, i) => {
         e.onclick = function () {
-            tag_remove = filter_tags.splice(i, 1);
+            tag_remove = filter_tags.splice(0, 1);
             localStorage.setItem("eop-buster_filter_tags", JSON.stringify(filter_tags))
             document.querySelector(`.filter-active[tag="${tag_remove[0].parent}"]`).remove();
             data_render = data_main;
@@ -140,6 +140,7 @@ function ClickItemFinal(e) {
     RemoveTag()
     filter_tags.push(new_tag)
     localStorage.setItem("eop-buster_filter_tags", JSON.stringify(filter_tags))
+    data_render = data_main;
     Filter(filter_tags[0]?.parent, filter_tags[0]?.text);
     Filter(filter_tags[1]?.parent, filter_tags[1]?.text);
     render(data_render);
