@@ -332,9 +332,9 @@ document.querySelector(".box .button").onclick = function () {
                     product: document.querySelector("#pay-form textarea[name='product']").value,
                     supporter: "",
                     status: "",
-                    "status-pay":"",
-                    "noti-payied":"hidden",
-                    "confirm-pay":""
+                    "status-pay": "",
+                    "noti-payied": "hidden",
+                    "confirm-pay": ""
                 }
                 fetch(
                     "https://65e85faa4bb72f0a9c4f1974.mockapi.io/orders",
@@ -347,8 +347,19 @@ document.querySelector(".box .button").onclick = function () {
                     }
                 )
                     .then(() => {
-                        clearData()
-                        window.location = location.href.replace("order", "welldone")
+                        Email.send({
+                            Host: "smtp.elasticemail.com",
+                            Username: "eopbuster@gmail.com",
+                            Password: "98CA9F02EB45AD9E8C3AEA22D5C408502139",
+                            To: ['phamxuantrung123d@gmail.com', 'lekimthanh28072003@gmail.com'],
+                            From: "eopbuster@gmail.com",
+                            Subject: "Đơn hàng mới từ eopbuster",
+                            Body: `Có một đơn hàng mới của ${localStorage.getItem("eop-buster_account")}`,
+                        })
+                        .then(() => {
+                            clearData()
+                            window.location = location.href.replace("order", "welldone")
+                        })
                     })
                     .catch(() => {
                         clearData()
@@ -356,15 +367,6 @@ document.querySelector(".box .button").onclick = function () {
                     });
             })
             .catch()
-        Email.send({
-            Host: "smtp.elasticemail.com",
-            Username: "eopbuster@gmail.com",
-            Password: "98CA9F02EB45AD9E8C3AEA22D5C408502139",
-            To: ['phamxuantrung123d@gmail.com', 'lekimthanh28072003@gmail.com'],
-            From: "eopbuster@gmail.com",
-            Subject: "Đơn hàng mới từ eopbuster",
-            Body: `Có một đơn hàng mới của ${form.querySelector("input[name='yourname']").value}`,
-        })
     };
 
 }
@@ -488,7 +490,7 @@ function showWarningToast() {
 
 if (localStorage.getItem("eop-buster_login")) showWarningToast();
 
-document.querySelector("nav .my-user").onclick = function(){
+document.querySelector("nav .my-user").onclick = function () {
     this.querySelector(".setting").classList.toggle("active")
 }
 

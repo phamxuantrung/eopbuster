@@ -4,6 +4,7 @@ body {
 
 p {
     color: #264653 !important;
+    text-wrap: nowrap;
 }
 
 select {
@@ -60,6 +61,7 @@ select {
     border-top: 1px solid rgba(0, 0, 0, .09);
     padding: 8px 12px;
     display: flex;
+    overflow-x: auto;
 }
 
 .option .add-filter{
@@ -219,6 +221,7 @@ select {
     border-radius: 4px;
     user-select: none;
     position: relative;
+    min-width: 760px;
 }
 
 .order .item {
@@ -262,8 +265,14 @@ select {
     padding: 0 20px;
 }
 
+.order .time-order{
+    width: 100%;
+    text-align: right;
+}
+
 .order .title p {
     margin-right: 6px;
+    text-wrap: nowrap;
 }
 
 .order .title i {
@@ -326,6 +335,7 @@ select {
     outline: none;
     padding: 3px 8px;
     text-transform: capitalize;
+    text-wrap: nowrap;
     margin: 0 8px;
     display: none;
 }

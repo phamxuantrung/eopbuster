@@ -36,7 +36,7 @@ fetch("https://65e85faa4bb72f0a9c4f1974.mockapi.io/orders")
                         <img src="./images/unit.png" alt="">
                         <div class="info-product">
                             <p>${item.product}</p>
-                            <span class="deadline">Thanh toán khi hoàn thành</p>
+                            <div class="deadline">Thanh toán khi hoàn thành</div>
                         </div>
                         <button onclick="Cancel('${item.id}')" class="cancel-order ${(item.status === "") ? 'active' : ''}">Hủy</button>
                     </div>

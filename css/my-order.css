@@ -208,10 +208,8 @@ nav .setting>div:hover {
     color: #7a60ff;
     font-size: 12px;
     line-height: 16px;
-    margin: 0 6px 0 0;
+    margin: 4px 6px 1px 0;
     padding: 2px 4px;
-    vertical-align: middle;
-    margin-top: 5px;
 }
 
 .my-order .total-pay {

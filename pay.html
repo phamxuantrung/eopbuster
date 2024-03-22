@@ -163,22 +163,32 @@
     fetch("https://65e85faa4bb72f0a9c4f1974.mockapi.io/orders")
         .then(res => res.json())
         .then(data => {
-            document.querySelector(".loading").style.display = "none"
-            document.querySelector(".qr-pay").style.display = "flex"
-            showNoti();
             let currentOrder = data.find(e => {
                 return e.madon === madon;
             })
+            if (currentOrder.supporter === "") {
+                alert("Bạn chưa thể thanh toán khi đơn hàng chưa được xác nhận");
+                const currentURL = window.location.href;
+                const urlParts = currentURL.split('?');
+                const baseURL = urlParts[0];
+                const newURL = baseURL.replace('pay', 'my-order');
+                window.location.href = newURL;
+                return;
+            }
+
+            document.querySelector(".loading").style.display = "none"
+            document.querySelector(".qr-pay").style.display = "flex"
+            showNoti();
             document.querySelector(".madonhang").innerText = currentOrder.madon
             document.querySelector(".thanhtien").innerText = currentOrder.pay
 
-            if (currentOrder.supporter === "Trung"){
+            if (currentOrder.supporter === "Trung") {
                 document.querySelector(".ten").innerText = "Phạm Xuân Trung";
                 document.querySelector(".stk").innerText = "0000 3512 408";
                 document.querySelector("img.qr").src = "./images/qr-trung.jpg";
                 document.querySelector("img.ngan-hang").src = "./images/tp-bank.png";
             }
-            else if (currentOrder.supporter === "Thành"){
+            else if (currentOrder.supporter === "Thành") {
                 document.querySelector(".ten").innerText = "Lê Kim Thành";
                 document.querySelector(".stk").innerText = "9383204822";
                 document.querySelector("img.qr").src = "./images/qr-thanh.jpg";
@@ -247,7 +257,8 @@
                             Subject: 'Xác nhận thanh toán.',
                             Body: `Họ tên: ${itemToUpdate.name}
                             Mã đơn: ${itemToUpdate.madon}
-                            Thành tiền: ${itemToUpdate.pay}`,
+                            Thành tiền: ${itemToUpdate.pay}
+                            Thanh toán cho: ${itemToUpdate.supporter}`,
                         })
                         showPayiedNoti()
                     });

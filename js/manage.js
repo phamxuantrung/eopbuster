@@ -271,6 +271,28 @@ document.addEventListener('click', function (event) {
     }
 });
 
+function formatDate(dateString) {
+    const dateTime = new Date(dateString);
+
+    // Lấy thông tin về giờ, phút và giây
+    const hours = dateTime.getHours();
+    const minutes = dateTime.getMinutes();
+    const seconds = dateTime.getSeconds();
+
+    // Lấy thông tin về ngày, tháng và năm
+    const year = dateTime.getFullYear();
+    const month = dateTime.getMonth() + 1; // Tháng bắt đầu từ 0 nên cần +1
+    const day = dateTime.getDate();
+
+    // Định dạng lại chuỗi ngày tháng năm
+    const formattedDate = `${day}/${month}/${year}`;
+
+    // Định dạng lại chuỗi giờ phút giây
+    const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+    return `${formattedTime} - ${formattedDate}`;
+}
+
 
 function render(data) {
     let htmlTemplateItemOrder = data.map(item => {
@@ -282,6 +304,7 @@ function render(data) {
                     <i onclick="copy(this)" data-custom="${item.password}" class="fa-solid fa-lock password"></i>
                     <i onclick="copy(this)" data-custom="${item.link}" class="fa-solid fa-link link"></i>
                     <div class="tag-payied ${(item['confirm-pay'] === "ok") ? "active" : ""}">Đã thanh toán</div>
+                    <div class="time-order">${formatDate(new Date(item.time))}</div>
                 </div>
                 <div class="info">
                     <p>${item.product}</p>
