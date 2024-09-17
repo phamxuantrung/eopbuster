@@ -1,3 +1,8 @@
+let priceUnit = 7;
+let priceTest = 15;
+let priceWriting = 3;
+let priceFast = 3;
+
 // Render items
 let units = [1, 2, 3, 4, 5, 6, 7, 8]
 let htmlTemplateUnit = units.map(unit => {
@@ -5,7 +10,7 @@ let htmlTemplateUnit = units.map(unit => {
     <div class="item">
                     <div class="item-wrapper">
                         <div class="item-infor">
-                            <div class="input-checkbox" price="7">
+                            <div class="input-checkbox" price="${priceUnit}">
                                 <input type="checkbox">
                                 <div class="stardust-checkbox"></div>
                             </div>
@@ -18,15 +23,15 @@ let htmlTemplateUnit = units.map(unit => {
                             <option value="fast">Nhanh</option>
                         </select>
                         <div class="item-price">
-                            <div class="price-1">₫ 10.000</div>
-                            <div class="price-2">₫ 7.000</div>
+                            <div class="price-1">₫ ${priceUnit + 3}.000</div>
+                            <div class="price-2">₫ ${priceUnit}.000</div>
                         </div>
                     </div>
                     <div class="addwriting">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                           </svg>                          
-                        <div class="title">Kèm thêm bài Writing (₫ 3.000)</div>
+                        <div class="title">Kèm thêm bài Writing (₫ ${priceWriting}.000)</div>
                         <input disabled class="input-checkbox-addwriting" type="checkbox">
                     </div>
     </div>
@@ -40,7 +45,7 @@ let htmlTemplateTest = tests.map(test => {
     <div class="item">
     <div class="item-wrapper">
     <div class="item-infor">
-        <div class="input-checkbox" price="10">
+        <div class="input-checkbox" price="${priceTest}">
             <input type="checkbox">
             <div class="stardust-checkbox"></div>
         </div>
@@ -53,8 +58,8 @@ let htmlTemplateTest = tests.map(test => {
         <option value="fast">Nhanh</option>
     </select>
     <div class="item-price">
-        <div class="price-1">₫ 15.000</div>
-        <div class="price-2">₫ 10.000</div>
+        <div class="price-1">₫ ${priceTest + 5}.000</div>
+        <div class="price-2">₫ ${priceTest}.000</div>
     </div>
 </div>
                 </div>
@@ -183,14 +188,14 @@ document.querySelectorAll(".box .speed").forEach((e, i) => {
         if (e.value === "fast") {
             fast[i] += 3;
             total += 3;
-            p1.innerText = `₫ ${Number(p1.innerText.slice(2)) + 3}.000`
-            p2.innerText = `₫ ${Number(p2.innerText.slice(2)) + 3}.000`
+            p1.innerText = `₫ ${Number(p1.innerText.slice(2)) + priceFast}.000`
+            p2.innerText = `₫ ${Number(p2.innerText.slice(2)) + priceFast}.000`
         }
         else {
-            fast[i] -= 3;
-            total -= 3;
-            p1.innerText = `₫ ${Number(p1.innerText.slice(2)) - 3}.000`
-            p2.innerText = `₫ ${Number(p2.innerText.slice(2)) - 3}.000`
+            fast[i] -= priceFast;
+            total -= priceFast;
+            p1.innerText = `₫ ${Number(p1.innerText.slice(2)) - priceFast}.000`
+            p2.innerText = `₫ ${Number(p2.innerText.slice(2)) - priceFast}.000`
         }
         totalPay.innerText = `₫ ${total}.000`;
     }
@@ -199,12 +204,12 @@ document.querySelectorAll(".box .speed").forEach((e, i) => {
 document.querySelectorAll(".box .addwriting input").forEach((e, i) => {
     e.onchange = function () {
         if (e.checked) {
-            addwriting[i] += 3;
-            total += 3;
+            addwriting[i] += priceWriting;
+            total += priceWriting;
         }
         else {
-            addwriting[i] -= 3;
-            total -= 3;
+            addwriting[i] -= priceWriting;
+            total -= priceWriting;
         }
         totalPay.innerText = `₫ ${total}.000`;
     }
@@ -240,7 +245,7 @@ document.querySelector(".box .button").onclick = function () {
                     ${(e < 8) ? `<div class="title">Unit ${e + 1} (Không bao gồm Writing và Speaking)</div>` : `<div class="title">Unit Test ${e - 7}</div>`}
                 </div>
                 <div class="speed">${speedSelectCurrents[i]}</div>
-                <div class="price">₫ ${(e < 8) ? ((speedFasts.includes(e)) ? '10.000' : '7.000') : ((speedFasts.includes(e)) ? '13.000' : '10.000')}</div>
+                <div class="price">₫ ${(e < 8) ? ((speedFasts.includes(e)) ? `${priceUnit + 3}.000` : `${priceUnit}.000`) : ((speedFasts.includes(e)) ? `${priceUnit + priceFast + 3}.000` : `${priceUnit + priceFast}.000`)}</div>
             </div>
             ${(e < 8) ? `<div class="addwriting"><div style="display: flex; align-items: center;"><input type="checkbox" ${(addwritingCheckeds.includes(e)) ? 'checked' : ''}><div class="sNymxn"><span>Kèm thêm bài Writing</span><div class="_0IoUJ3">Gợi ý cho bạn</div></div></div><div class="JKf6hB"><span>₫ 3.000</span></div></div>` : ``}</div>
         `
@@ -255,11 +260,11 @@ document.querySelector(".box .button").onclick = function () {
         e.onchange = function () {
             if (e.checked) {
                 addwritingCheckeds.push(productCheckeds[i])
-                total += 3;
+                total += priceWriting;
             }
             else {
                 addwritingCheckeds = addwritingCheckeds.filter(e => e !== productCheckeds[i])
-                total -= 3;
+                total -= priceWriting;
             }
             document.querySelector(".final form .agree-order input").checked = false;
             document.querySelector(".final .final-pay .final-total-pay").innerText = `₫ ${total}.000`
