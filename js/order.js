@@ -1,5 +1,5 @@
-let priceUnit = 7;
-let priceTest = 15;
+let priceUnit = 8;
+let priceTest = 12;
 let priceWriting = 3;
 let priceFast = 3;
 
